@@ -1,17 +1,18 @@
 [
 {
-  "modid": "Botania",
-  "name": "Botania",
-  "description": "Botania is a mod that adds nature magic to Minecraft.",
+  "modid": "betterboat",
+  "name": "Better Boat",
+  "description": "This mod fixes several issues with vanilla boats.",
   "version": "${version}",
   "mcversion": "${mcversion}",
-  "logoFile": "assets/botania/textures/logo.png",
-  "url": "http://www.botaniamod.net",
+  "logoFile": "assets/betterboat/textures/logo.png",
+  "url": "",
   "updateUrl": "",
-  "authorList": ["Vazkii"],
-  "credits": "Azanor, dylan4ever, Flaxbeard, Futureazoo, wiiv, Rorax, Lorc, Adubbz, WTFG33ks, Auric245524, MegaManki, Kain Vinosec, Kihira, mDiyo, Mikeemoo, ChickenBones, PowerCrystals, cpw",
+  "authorList": ["SanAndreasP"],
+  "credits": "Vazkii, for making me do this mod :P",
   "parent": "",
   "screenshots": [],
-  "dependencies": []
+  "dependencies": [],
+  "requiredMods": ["sapmanpack"]
 }
 ]
