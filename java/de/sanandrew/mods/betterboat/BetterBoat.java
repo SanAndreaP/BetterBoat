@@ -16,9 +16,8 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import de.sanandrew.mods.betterboat.entity.EntityBetterBoat;
 import de.sanandrew.mods.betterboat.entity.EntitySpawnHandler;
 import de.sanandrew.mods.betterboat.network.PacketManager;
+import net.minecraft.entity.EntityList;
 import net.minecraftforge.common.MinecraftForge;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 @Mod(modid = BetterBoat.MOD_ID, version = BetterBoat.VERSION, name = "Better Boat", dependencies = "required-after:sapmanpack@[2.4.1,)")
 public class BetterBoat
@@ -46,6 +45,7 @@ public class BetterBoat
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         EntityRegistry.registerModEntity(EntityBetterBoat.class, "betterBoat", 0, BetterBoat.instance, 80, 3, true);
+        EntityList.stringToClassMapping.put("Boat", EntityBetterBoat.class); // workaround for vanilla boats already ridden!
 
         proxy.registerRenderers();
     }
