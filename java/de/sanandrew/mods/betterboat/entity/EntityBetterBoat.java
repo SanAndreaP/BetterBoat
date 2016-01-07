@@ -8,17 +8,16 @@
  */
 package de.sanandrew.mods.betterboat.entity;
 
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import de.sanandrew.core.manpack.util.javatuples.Unit;
-import de.sanandrew.mods.betterboat.network.PacketManager;
+import de.sanandrew.mods.betterboat.BetterBoat;
+import de.sanandrew.mods.betterboat.network.PacketSendBoatPos;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityBoat;
-import net.minecraft.entity.passive.EntitySquid;
-import net.minecraft.entity.passive.EntityWaterMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -381,7 +380,7 @@ public class EntityBetterBoat
                 }
 
                 if( this.ticksExisted % 20 == 0 ) {
-                    PacketManager.sendToAllAround(PacketManager.BOAT_SYNC, this.dimension, this.posX, this.posY, this.posZ, 128.0D, Unit.with(this));
+                    BetterBoat.network.sendToAllAround(new PacketSendBoatPos(this), new NetworkRegistry.TargetPoint(this.dimension, this.posX, this.posY, this.posZ, 128.0D));
                 }
             }
 

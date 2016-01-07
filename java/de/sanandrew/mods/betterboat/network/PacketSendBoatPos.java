@@ -8,36 +8,60 @@
  */
 package de.sanandrew.mods.betterboat.network;
 
-import de.sanandrew.core.manpack.network.IPacket;
-import de.sanandrew.core.manpack.util.javatuples.Tuple;
+import net.darkhax.bookshelf.common.network.AbstractMessage;
 import de.sanandrew.mods.betterboat.BetterBoat;
 import de.sanandrew.mods.betterboat.entity.EntityBetterBoat;
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufInputStream;
-import io.netty.buffer.ByteBufOutputStream;
-import net.minecraft.client.Minecraft;
-import net.minecraft.network.INetHandler;
-
-import java.io.IOException;
+import net.minecraft.entity.player.EntityPlayer;
 
 public class PacketSendBoatPos
-        implements IPacket
+        extends AbstractMessage<PacketSendBoatPos>
 {
-    @Override
-    public void process(ByteBufInputStream byteBufInputStream, ByteBuf byteBuf, INetHandler iNetHandler) throws IOException {
-        BetterBoat.proxy.setBoatPosAndRot(byteBufInputStream.readInt(), byteBufInputStream.readDouble(), byteBufInputStream.readDouble(), byteBufInputStream.readDouble(),
-                                          byteBufInputStream.readFloat(), byteBufInputStream.readFloat());
+    private int boatId;
+    private double posX;
+    private double posY;
+    private double posZ;
+    private float rotationYaw;
+    private float rotationPitch;
+
+    public PacketSendBoatPos() {}
+
+    public PacketSendBoatPos(EntityBetterBoat boat) {
+        this.boatId = boat.getEntityId();
+        this.posX = boat.posX;
+        this.posY = boat.posY;
+        this.posZ = boat.posZ;
+        this.rotationYaw = boat.rotationYaw;
+        this.rotationPitch = boat.rotationPitch;
     }
 
     @Override
-    public void writeData(ByteBufOutputStream byteBufOutputStream, Tuple tuple) throws IOException {
-        EntityBetterBoat boat = (EntityBetterBoat)tuple.getValue(0);
+    public void handleClientMessage(PacketSendBoatPos pkt, EntityPlayer player) {
+        BetterBoat.proxy.setBoatPosAndRot(pkt.boatId, pkt.posX, pkt.posY, pkt.posZ, pkt.rotationYaw, pkt.rotationPitch);
+    }
 
-        byteBufOutputStream.writeInt(boat.getEntityId());
-        byteBufOutputStream.writeDouble(boat.posX);
-        byteBufOutputStream.writeDouble(boat.posY);
-        byteBufOutputStream.writeDouble(boat.posZ);
-        byteBufOutputStream.writeFloat(boat.rotationYaw);
-        byteBufOutputStream.writeFloat(boat.rotationPitch);
+    @Override
+    public void handleServerMessage(PacketSendBoatPos packetSendBoatPos, EntityPlayer entityPlayer) {
+
+    }
+
+    @Override
+    public void fromBytes(ByteBuf buf) {
+        this.boatId = buf.readInt();
+        this.posX = buf.readDouble();
+        this.posY = buf.readDouble();
+        this.posZ = buf.readDouble();
+        this.rotationYaw = buf.readFloat();
+        this.rotationPitch = buf.readFloat();
+    }
+
+    @Override
+    public void toBytes(ByteBuf buf) {
+        buf.writeInt(this.boatId);
+        buf.writeDouble(this.posX);
+        buf.writeDouble(this.posY);
+        buf.writeDouble(this.posZ);
+        buf.writeFloat(this.rotationYaw);
+        buf.writeFloat(this.rotationPitch);
     }
 }

@@ -12,19 +12,24 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.relauncher.Side;
 import de.sanandrew.mods.betterboat.entity.EntityBetterBoat;
 import de.sanandrew.mods.betterboat.entity.EntitySpawnHandler;
-import de.sanandrew.mods.betterboat.network.PacketManager;
+import de.sanandrew.mods.betterboat.network.PacketSendBoatPos;
+import net.darkhax.bookshelf.lib.util.Utilities;
 import net.minecraft.entity.EntityList;
 import net.minecraftforge.common.MinecraftForge;
 
-@Mod(modid = BetterBoat.MOD_ID, version = BetterBoat.VERSION, name = "Better Boat", dependencies = "required-after:sapmanpack@[2.4.1,)")
+@Mod(modid = BetterBoat.MOD_ID, version = BetterBoat.VERSION, name = "Better Boat", dependencies = "required-after:bookshelf@[1.0.4.178,)")
 public class BetterBoat
 {
     public static final String MOD_ID = "betterboat";
-    public static final String VERSION = "1.0.0";
+    public static final String VERSION = "1.1.0";
     public static final String MOD_CHANNEL = "BetterBoatNWCH";
+    public static SimpleNetworkWrapper network;
 
     private static final String MOD_PROXY_CLIENT = "de.sanandrew.mods.betterboat.client.ClientProxy";
     private static final String MOD_PROXY_COMMON = "de.sanandrew.mods.betterboat.CommonProxy";
@@ -37,13 +42,16 @@ public class BetterBoat
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        PacketManager.initialize();
+        network = NetworkRegistry.INSTANCE.newSimpleChannel(MOD_CHANNEL);
+
+        Utilities.registerMessage(network, PacketSendBoatPos.class, 0, Side.CLIENT);
 
         MinecraftForge.EVENT_BUS.register(new EntitySpawnHandler());
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
+
         EntityRegistry.registerModEntity(EntityBetterBoat.class, "betterBoat", 0, BetterBoat.instance, 80, 3, true);
         EntityList.stringToClassMapping.put("Boat", EntityBetterBoat.class); // workaround for vanilla boats already ridden!
 
