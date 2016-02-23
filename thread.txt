@@ -1,0 +1,31 @@
+[center][img width='355' height='128']http://media-curse.cursecdn.com/attachments/148/863/3297b8969ed3a116f0ce4ccf34660c77.png[/img][/center]
+[size=16px][b]This mod is a bugfix mod for vanilla boats.[/b][/size]
+You're tired of having your boat break randomly into planks when cruising around shores? A squid suddenly pops up and there's no way to prevent a collision? This mod not only fixes the desync issue, but a few annoyances as well:
+[list]
+[*]Boats break into their boat item now! Even if you crash, you won't get planks and sticks back, but rather the boat itself, ready to be placed again!
+[*]Your boat won't randomly break in the middle of nowhere anymore! The server now syncs the boat position with the client properly.
+[*]Mobs and animals won't break boats anymore! Rather they'll get damaged at a certain velocity. You'll bounce back a bit and can then carry on to the next beach!
+[*]You're in creative? There's no need for you to have any kind of item dropped when the boat breaks. This behavior which is already there if you break the boat yourself is now applied to crashed boats as well.
+[/list]
+[size=16px][b]How can you download this mod, I hear you ask!?[/b][/size]
+Look no further, as the download can be found here:
+[mod]230898-better-boat[/mod]
+
+[size=16px][b]Does this mod require anything else?[/b][/size]
+Yes, actually it requires my Manager Pack, which you can find here as well! Convenient, isn't it?
+[mod]226994-sanandreasps-manager-pack[/mod]
+
+[i]You install both mods by dropping them into the mods folder. You'll need [b]Forge[/b]! Recommended is the latest version, but any version above [b]1291[/b] should work![/i]
+
+[size=16px][b]Anything else I need to know about this mod?[/b][/size]
+[url=http://www.minecraftforum.net/members/Vazkii]Vazkii[/url] gave me the idea for this mod, and since I didn't find any mod which does this functionality, I made this one.
+Codewise, I replace the vanilla boat entity with my own custom boat entity to keep compatibility and make it easier for me to fix those issues. Therefore, if you decide to remove the mod, please break any boat beforehand or they'll be lost! (I don't temper with the items, so they'll be safe)
+
+[i]Source:[/i] https://github.com/SanAndreasP/BetterBoat
+If you have any issue with this mod, go here: https://github.com/SanAndreasP/BetterBoat/issues
+
+[color=rgb(255, 0, 0)][b]This mod requires you to have Java 7 or higher installed, since I use Java 7 features in my mods! If you can't get it running, read this first! https://github.com/SanAndreasP/ClaySoldiersMod/issues/67[/b][/color]
+
+[i]License:[/i]
+[url=http://minecraft.curseforge.com/linkout?remoteUrl=http%253a%252f%252fcreativecommons.org%252flicenses%252fby-nc-sa%252f4.0%252f][img width='88' height='31' alt='Creative Commons License']https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png[/img][/url]
+This work is licensed under a [url=http://minecraft.curseforge.com/linkout?remoteUrl=http%253a%252f%252fcreativecommons.org%252flicenses%252fby-nc-sa%252f4.0%252f]Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License[/url].
